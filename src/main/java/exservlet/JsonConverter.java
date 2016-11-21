@@ -1,5 +1,7 @@
 package exservlet;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
+import exservlet.model.Person;
 import exservlet.model.Post;
 
 import java.util.Arrays;
@@ -14,6 +16,13 @@ public class JsonConverter {
         post.setHidden(false);
         post.setTags(Arrays.asList("java", "json"));
 
+        String json = new ObjectMapper().writeValueAsString(Arrays.asList(post, post));
+
+        String input = Util.readFileFromClasspath("people.json");
+
+        Person person = new ObjectMapper().readValue(input, Person.class);
+
+        System.out.println(person);
     }
 
 
